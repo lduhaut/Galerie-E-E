@@ -46,28 +46,27 @@ function showData(res) {
   
   html += "<li class='item-wrapper flex-sm-100 flex-md-50 flex-lg-33 flex-gt-lg-20'>";
   
-  if (lien) html += "<a href='" + data.url + "' onclick='onGalleryClick(this);' target='_blank' ";
-  else html += "<span ";
+  if (lien) html += "<a class='tuile' href='" + data.url + "' target='_blank'";
+  else html += "<span class='tuile'";
   
-  html += "class='tuile ld-round";
-  
-  if (data.bgImg) {
-      html += " ld-bgImg'>";
-      html += '<div class="tuile-contenu layout-align-space-between layout-column ld-round ld-bgImg" style="background-image:url(\'' + data.bgImg + '\')">';
-      
-      var rgb = hexToRgb(data.bgColor);
-      
-      html += '<div class="tuile-titre" style="background-color:rgba('+rgb.r+','+rgb.g+','+rgb.b+',0.6);">' + data.titre + '</div>';
-    } else {
-      html += "' style='background-color:" + data.bgColor + "'>";
-      html += '<div class="tuile-contenu layout-align-space-between layout-column ld-round">';
-      
-      html += '<div class="tuile-titre">' + data.titre + '</div>';
+  html += " style='background-color:" + data.bgColor + "'>";
+    
+    html += '<div class="tuile-contenu layout-align-space-between layout-column">';
+    
+    html += '<ul class="tuile-icons-container layout-align-start-center layout-row">';
+    
+    for (var j = 0; j < res.icons.length; j++) {
+      var iconName = res.icons[j];
+      var lien = res.iconsLinks[j];
+      if (data.use.indexOf(iconName) >= 0) {
+        html+= '<li class="tuile-icons"><img alt="' + iconName + '" title="' + iconName + '" src="' + lien + '"></li>';
+      }
     }
     
+    html += '<li class="tuile-icons"></li></ul>';
     
-    
-    //html += '<div class="tuile-etat">' + data.etat + '</div>';
+    html += '<h2 class="tuile-titre">' + data.titre + '</h2>';
+    html += '<h4 class="tuile-etat">' + data.etat + '</h4>';
     html += '</div>';
     
     if (lien) html += "</a>";
@@ -77,18 +76,5 @@ function showData(res) {
   }
   
   liste.append(html);
-}
-
-function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-    } : null;
-}
-
-function onGalleryClick(link) {
-  ga('send', 'event', 'Album', 'open', link.querySelector('div.tuile-titre').innerHTML);
 }
 </script>

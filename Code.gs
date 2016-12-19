@@ -1,11 +1,10 @@
-var sheetId = "1PPre4DrJeZio-KchomuvQGXiKQKt8o26nCw-iKv5Qs0";
+var sheetId = "1j7imS2KLKND8ir36mxBSDpdMtzWRuwwNV2pY2JWREBg";
 
 var lignePremierItem = 4;
 
 var idxCol = 0;
 var IDX_COL_TITRE = idxCol++;
 var IDX_COL_LIEN = idxCol++;
-var IDX_COL_PHOTO_COUV = idxCol++;
 var IDX_COL_ETAT = idxCol++;
 // Index de la colonne représentant le premier icone
 var IDX_COL_FIRST_ICON = idxCol++;
@@ -13,46 +12,12 @@ var IDX_COL_FIRST_ICON = idxCol++;
 var infosGenerales_;
 
 function doGet(request) {
-  
-  var accessToken = request.parameter['q'];
-  manageAccessToken(accessToken);
-  
-  
   var template = HtmlService.createTemplateFromFile('Portail');
-  
-  // passer l'accessToken à la page
-  template.q = accessToken;  
+  // Chargement de la donnée de façon asynchrone ? cf https://developers.google.com/apps-script/guides/html/best-practices
     
   return template.evaluate()
     .setFaviconUrl(getInfosGenerales().favicon)
-    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
-}
-
-function manageAccessToken(token) {
-  var ss = SpreadsheetApp.openById(sheetId);
-  var sheetAuth = ss.getSheetByName("Auth");
-  var tokens = sheetAuth.getRange(2, 2, sheetAuth.getLastRow() - 1).getValues();
-  var found = false;
-  if (token && token.length > 0) {
-   for (var i = 0; i < tokens.length; i++) {
-    var tok = tokens[i][0]; 
-    if (tok == token) {
-      found = true;
-      break;
-    }
-  }
-  }
- 
-  
-  var sheetHisto = ss.getSheetByName("Historique");
-  var newEnregistrement = [];
-  newEnregistrement[0] = [];
-  newEnregistrement[0][0] = new Date();
-  newEnregistrement[0][1] = token;
-  newEnregistrement[0][2] = found;
-  sheetHisto.getRange(sheetHisto.getLastRow() + 1, 1, 1, newEnregistrement[0].length).setValues(newEnregistrement);
-  
-  if (!found) throw "Vous n'êtes pas autorisé à accéder à cette page";
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');;
 }
 
 function getData() {
@@ -91,7 +56,6 @@ function getData() {
     var etat = ligne[IDX_COL_ETAT];
     dataJs.etat = etat;
     dataJs.bgColor = getBgColorEtat(etat);
-    dataJs.bgImg = ligne[IDX_COL_PHOTO_COUV];
     
     dataJs.titre = ligne[IDX_COL_TITRE];
     dataJs.url = ligne[IDX_COL_LIEN];
@@ -113,7 +77,6 @@ function getData() {
   }
   
   res.datas = datasJs;
-  
   return res;
 }
 

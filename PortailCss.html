@@ -4,6 +4,7 @@
     margin-left: 0px;
     margin-right: 0px;
     
+    /* Ca ne va pas jusqu'en bas, malgré un height 100% :s donc je laisse à blanc, pour le moment ... */
     background-color: #FFF;
   }
   
@@ -101,10 +102,10 @@ li {
     box-sizing: border-box;
     height: 100%;
     left: 0;
+    padding: 28px;
     position: absolute;
     top: 0;
     width: 100%;
-    text-align:right;
 }
 
 .tuile-icons {
@@ -137,39 +138,12 @@ li {
     font-weight: 300;
     line-height: 32px;
     margin: 0;
-    margin-top: 50px;
-    padding: 5px 26px;
-    
-    visibility : hidden;
-    opacity: 0;
-    color: white;
-    transition: all 0.3s ease-in;
+    min-height: 96px;
+    margin-top: 20px;
 }
 
-.tuile-contenu:hover .tuile-titre, .tuile-contenu:hover .tuile-etat {
-
-    visibility : visible;
-    
-    opacity: 1;
-    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2);
-}
-
-.tuile-etat {
+h4.tuile-etat {
     text-align: right;
     font-style: italic;
-    margin-bottom: 50px;
-    padding-left: 26px;
-    padding-right: 26px;
-    color: white;
-}
-
-.ld-bgImg {
-  background-size: cover;
-  background-position-x: 50%;
-  background-position-y: 50%;
-}
-
-.ld-round {
-  border-radius: 50px;
 }
 </style>
