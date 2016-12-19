@@ -1,0 +1,176 @@
+<style>
+  body {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    
+    /* Ca ne va pas jusqu'en bas, malgré un height 100% :s donc je laisse à blanc, pour le moment ... */
+    background-color: #FFF;
+  }
+  
+  .header {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+    color: #707070;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+    height:80px;
+    }
+    
+    header {
+    display: block;
+
+}
+
+.main {
+ flex: 1;
+ box-sizing: border-box;
+}
+
+.header-wrapper {
+    height: 80px;
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 100%;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.header-logo-container {
+    margin-left: 32px;
+    max-width: 2000px;
+    overflow: hidden;
+}
+
+#header-titre {
+    font-size: 20px;
+    font-weight: 300;
+    
+    margin-left: 15px;
+}
+
+#header-logo {
+  height : 50px;
+}
+.main {
+    margin-top: 80px;
+}
+
+  .items-grid {
+    margin: 0;
+    padding: 0;
+  }
+  
+ul {
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.item-wrapper {
+    list-style: none;
+}
+
+    
+.tuile {
+    background-color: #f1fdf6;
+    box-sizing: border-box;
+    color: #303030;
+    display: block;
+    margin: 8px;
+    min-height: 260px;
+    position: relative;
+    text-decoration: none;
+    transition: box-shadow .2s;
+}
+
+.tuile:hover {
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2);
+}
+
+.tuile-contenu {
+    box-sizing: border-box;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align:right;
+}
+
+.tuile-icons {
+    height: 24px;
+    list-style: none;
+    width: 24px;
+}
+
+.tuile-icons img {
+    border: 0 none;
+    max-height: 100%;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.card__product-count {
+    color: #c7c7c7;
+    display: inline-block;
+    line-height: 32px;
+    margin-left: 5px;
+}
+
+.tuile-icons-container {
+    margin: 0;
+    padding: 0;
+}
+
+.tuile-titre {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 32px;
+    margin: 0;
+    margin-top: 50px;
+    padding: 5px 26px;
+    
+    visibility : hidden;
+    opacity: 0;
+    color: white;
+    transition: all 0.3s ease-in;
+}
+
+.tuile-contenu:hover .tuile-titre, .tuile-contenu:hover .tuile-etat {
+
+    visibility : visible;
+    
+    opacity: 1;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2);
+}
+
+.tuile-etat {
+    text-align: right;
+    font-style: italic;
+    margin-bottom: 50px;
+    padding-left: 26px;
+    padding-right: 26px;
+    color: white;
+}
+
+.ld-bgImg {
+  background-size: cover;
+  background-position-x: 50%;
+  background-position-y: 50%;
+}
+
+.ld-round {
+  border-radius: 50px;
+}
+</style>

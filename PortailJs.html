@@ -1,0 +1,94 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+/**
+* inclue une ressource (ex : css)
+*/
+function include(filename) {
+return HtmlService.createHtmlOutputFromFile(filename)
+.setSandboxMode(HtmlService.SandboxMode.IFRAME)
+.getContent();
+}
+
+$(function() {
+google.script.run
+.withSuccessHandler(showData)
+.withFailureHandler(onGetDataError)
+.getData();
+});
+
+function onGetDataError(e) {
+var loading = $('#loading');
+loading.empty();
+loading.append('Error : ' + e);
+}
+
+function showData(res) {
+
+  var loading = $('#loading');
+  loading.empty();
+  
+  var $titre = $('#header-titre');
+  $titre.append(res.titre);
+  
+  var $iconeAppli = $('#header-logo');
+  $iconeAppli.attr("src", res.iconeAppli);
+  
+  var contenu = $('#contenu');
+  var liste = $('#liste');
+  
+  var valeurs = res.datas;
+  var html = '';
+  
+  for (var i = 0; i < valeurs.length; i++) {
+  
+    var data = valeurs[i];
+    var lien = data.url;
+  
+  html += "<li class='item-wrapper flex-sm-100 flex-md-50 flex-lg-33 flex-gt-lg-20'>";
+  
+  if (lien) html += "<a href='" + data.url + "' onclick='onGalleryClick(this);' target='_blank' ";
+  else html += "<span ";
+  
+  html += "class='tuile ld-round";
+  
+  if (data.bgImg) {
+      html += " ld-bgImg'>";
+      html += '<div class="tuile-contenu layout-align-space-between layout-column ld-round ld-bgImg" style="background-image:url(\'' + data.bgImg + '\')">';
+      
+      var rgb = hexToRgb(data.bgColor);
+      
+      html += '<div class="tuile-titre" style="background-color:rgba('+rgb.r+','+rgb.g+','+rgb.b+',0.6);">' + data.titre + '</div>';
+    } else {
+      html += "' style='background-color:" + data.bgColor + "'>";
+      html += '<div class="tuile-contenu layout-align-space-between layout-column ld-round">';
+      
+      html += '<div class="tuile-titre">' + data.titre + '</div>';
+    }
+    
+    
+    
+    //html += '<div class="tuile-etat">' + data.etat + '</div>';
+    html += '</div>';
+    
+    if (lien) html += "</a>";
+    else html += "</span>";
+    
+    html += "</li>";
+  }
+  
+  liste.append(html);
+}
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+function onGalleryClick(link) {
+  ga('send', 'event', 'Album', 'open', link.querySelector('div.tuile-titre').innerHTML);
+}
+</script>

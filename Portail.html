@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.4/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <?!= include('PortailCss'); ?>
+  </head>
+  <body>
+  
+    <header class="header">
+      <div class="header-wrapper layout-align-space-between-center layout-row">
+        <div class="header-logo-container">
+           <div class="layout-align-start-center layout-row">
+             <img id="header-logo"/>
+             <span id="header-titre" id="titre"></span>
+           </div>
+         </div>
+      </div>
+    </header>
+  
+    <div class="main">
+      <div id="loading">Chargement en cours ...</div>
+    
+      <div id="contenu">
+        <ul id="liste" class="items-grid layout-wrap layout-row">
+        </ul>
+      </div>
+    </div>
+    
+    <?!= include('PortailJs'); ?>
+    
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+    ga('create', 'UA-85526339-1', 'auto');
+   
+   var acTok = '<?!= q ?>';
+    ga('set', 'dimension1', acTok);
+    
+    ga('set', 'userId', acTok); // Définir l'ID utilisateur à partir du paramètre user_id de l'utilisateur connecté.
+   
+   ga('send', 'pageview');
+    
+    
+//    _gaq.push(['_setCustomVar', 1, 'AccessToken', res.q]);
+//  _gaq.push([‘_trackEvent’, ‘LoadData’, ‘Chargement des données’]);
+  //_gaq.push(['_trackPageview']);
+  
+    
+    </script>
+  </body>
+</html>
+
+
